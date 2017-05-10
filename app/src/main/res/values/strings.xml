@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Reflexo</string>
+    <string name="start">Start</string>
+    <string name="start_three_series">Start series of 3!</string>
+</resources>
