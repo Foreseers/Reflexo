@@ -22,13 +22,13 @@ public class MainPresenterImpl implements MainPresenter, MainModelListener {
 
     public MainPresenterImpl(MainView mainView) {
         this.mainView = mainView;
-        mainView.showStartButton();
+        mainView.showStartButtons();
         this.mainModel = new MainModelImpl(this);
     }
 
     @Override
     public void onStartButtonPressed() {
-        mainView.hideStartButton();
+        mainView.hideStartButtons();
         mainView.showGameChoosingFragment();
     }
 
@@ -70,14 +70,14 @@ public class MainPresenterImpl implements MainPresenter, MainModelListener {
     }
 
     @Override
-    public void gameFinished(long time) {
-        mainView.showStartButton();
-        mainModel.onGameFinished(time);
+    public void gameFinished(long time, boolean result) {
+        mainView.showStartButtons();
+        mainModel.onGameFinished(time, result);
     }
 
     @Override
     public void gameFinishedNullReceived() {
-        mainView.showStartButton();
+        mainView.showStartButtons();
         mainModel.onGameAborted();
     }
 
@@ -85,7 +85,7 @@ public class MainPresenterImpl implements MainPresenter, MainModelListener {
     public void onBackButtonPressed(String stage) {
         if (stage.equals("gameChoose")){
             mainView.removeGameChoosingFragment();
-            mainView.showStartButton();
+            mainView.showStartButtons();
         } else if (stage.equals("seriesChoose")){
             mainView.removeSeriesChoosingFragment();
             mainView.showGameChoosingFragment();
@@ -93,6 +93,11 @@ public class MainPresenterImpl implements MainPresenter, MainModelListener {
             // Should not ever happen
             mainView.showToast("Back-button error occurred.");
         }
+    }
+
+    @Override
+    public void onStatisticsButtonPressed() {
+        mainView.startStatisticsActivity();
     }
 
     @Override
@@ -108,17 +113,25 @@ public class MainPresenterImpl implements MainPresenter, MainModelListener {
 
     @Override
     public void onGameFinished(long time) {
-        mainView.showToast("Took " + ((float) time / 1000) + " seconds!");
+        mainView.showToast("Took " + time + " seconds!");
     }
 
     @Override
-    public void onGameSeriesFinished(long time, int seriesCount) {
+    public void onGameSeriesFinished(float time, int seriesCount) {
         //seriesCount we don't use. Need to map in case of further usage
-        mainView.showToast("Took " + ((float) time / 1000) + " seconds on average of three tries!");
+        mainView.showToast("Took " + time + " seconds on average of three tries!");
     }
 
     @Override
     public void onGameSeriesAborted() {
         mainView.showToast("Series aborted!");
+    }
+
+    @Override
+    public void saveStatistics(MiniGame gameType, int initialCount, int correctTries, int incorrectTries, float averageReactionTime) {
+        MainStatisticsLogger.StatisticsBundle bundle = new MainStatisticsLogger.StatisticsBundle(gameType, initialCount, correctTries, incorrectTries,
+                averageReactionTime);
+        MainStatisticsLogger logger = new MainStatisticsLoggerImpl();
+        logger.logStatistics(bundle, mainView.getMainActivity());
     }
 }

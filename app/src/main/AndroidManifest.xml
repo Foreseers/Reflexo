@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".FourSquareGame.SquareGameActivity" />
-        <activity android:name=".TwoSquareGame.TwoSquareGameActivity"></activity>
+        <activity android:name=".TwoSquareGame.TwoSquareGameActivity" />
+        <activity android:name=".Statistics.StatisticsActivity"></activity>
     </application>
 
 </manifest>

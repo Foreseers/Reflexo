@@ -1,5 +1,6 @@
 package com.foreseer.reflexo.Main;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -8,10 +9,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.foreseer.reflexo.R;
 import com.foreseer.reflexo.FourSquareGame.SquareGameActivity;
+import com.foreseer.reflexo.Statistics.StatisticsActivity;
 import com.foreseer.reflexo.TwoSquareGame.TwoSquareGameActivity;
 
 import butterknife.BindView;
@@ -28,8 +31,11 @@ public class MainActivity extends AppCompatActivity implements MainView, GameCho
     @BindView(R.id.button_start)
     Button startButton;
 
+    @BindView(R.id.button_statistics)
+    Button statisticsButton;
+
     @BindView(R.id.main_grid_layout)
-    GridLayout gridLayout;
+    LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements MainView, GameCho
         ButterKnife.bind(this);
 
         startButton.setOnClickListener(v -> mainPresenter.onStartButtonPressed());
+        statisticsButton.setOnClickListener(v -> mainPresenter.onStatisticsButtonPressed());
 
         //startThreeButton.setOnClickListener(v -> mainPresenter.onStartThreeSeriesButtonPressed());
 
@@ -58,6 +65,13 @@ public class MainActivity extends AppCompatActivity implements MainView, GameCho
     public void startTwoSquareActivity() {
         Intent intent = new Intent(this, TwoSquareGameActivity.class);
         startActivityForResult(intent, 1);
+        overridePendingTransition(R.anim.fade_in_activity, R.anim.fade_out_activity);
+    }
+
+    @Override
+    public void startStatisticsActivity() {
+        Intent intent = new Intent(this, StatisticsActivity.class);
+        startActivity(intent);
         overridePendingTransition(R.anim.fade_in_activity, R.anim.fade_out_activity);
     }
 
@@ -99,13 +113,20 @@ public class MainActivity extends AppCompatActivity implements MainView, GameCho
     }
 
     @Override
-    public void hideStartButton() {
+    public void hideStartButtons() {
         startButton.setVisibility(View.GONE);
+        statisticsButton.setVisibility(View.GONE);
     }
 
     @Override
-    public void showStartButton() {
+    public void showStartButtons() {
         startButton.setVisibility(View.VISIBLE);
+        statisticsButton.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public Activity getMainActivity() {
+        return this;
     }
 
     @Override
@@ -116,7 +137,8 @@ public class MainActivity extends AppCompatActivity implements MainView, GameCho
         } else {
             if (requestCode == 1) {
                 long longTime = Long.parseLong(data.getStringExtra("reactionTime"));
-                mainPresenter.gameFinished(longTime);
+                boolean result = data.getBooleanExtra("result", false);
+                mainPresenter.gameFinished(longTime, result);
             }
         }
     }

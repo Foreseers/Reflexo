@@ -1,5 +1,7 @@
 package com.foreseer.reflexo.Main;
 
+import android.app.Activity;
+
 /**
  * Created by Foreseer on 10/05/2017.
  * For any questions, feel free to reach me using any of my contacts.
@@ -10,11 +12,13 @@ package com.foreseer.reflexo.Main;
 public interface MainView {
     public void startSquareActivity();
     public void startTwoSquareActivity();
+    public void startStatisticsActivity();
     public void showToast(String message);
     public void showGameChoosingFragment();
     public void removeGameChoosingFragment();
     public void showSeriesChoosingFragment();
     public void removeSeriesChoosingFragment();
-    public void hideStartButton();
-    public void showStartButton();
+    public void hideStartButtons();
+    public void showStartButtons();
+    public Activity getMainActivity();
 }

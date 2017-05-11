@@ -16,6 +16,9 @@ public class MainModelImpl implements MainModel {
     private int initialCount;
     private float reactionTimeSum;
 
+    private int correctCount;
+    private int incorrectCount;
+
     private MiniGame gameChosen;
 
     public MainModelImpl(MainModelListener mainModelListener) {
@@ -27,30 +30,47 @@ public class MainModelImpl implements MainModel {
         this.count = count;
         this.initialCount = count;
         this.reactionTimeSum = 0;
+        this.correctCount = 0;
+        this.incorrectCount = 0;
 
         mainModelListener.onGameStart(gameChosen);
     }
 
     @Override
-    public void onGameFinished(long time) {
+    public void onGameFinished(long time, boolean result) {
         if (count != 0) {
             count--;
         }
-        if (count == 0 && initialCount == 0){
-            gameChosen = null;
+
+        if (result){
+            correctCount++;
+        } else {
+            incorrectCount++;
+        }
+        reactionTimeSum += ((float) time / 1000);
+
+        if (count == 0 && initialCount == 1){
+            mainModelListener.saveStatistics(gameChosen, initialCount, correctCount, incorrectCount, reactionTimeSum / initialCount);
             mainModelListener.onGameFinished(time);
+            nullifyFields();
         } else {
             if (initialCount != 0 && count == 0){
                 float average = reactionTimeSum / initialCount;
-                mainModelListener.onGameSeriesFinished(time, initialCount);
-                initialCount = 0;
-                reactionTimeSum = 0;
-                gameChosen = null;
+                mainModelListener.saveStatistics(gameChosen, initialCount, correctCount, incorrectCount, reactionTimeSum / initialCount);
+                mainModelListener.onGameSeriesFinished(average, initialCount);
+                nullifyFields();
             } else if (initialCount != 0){
-                reactionTimeSum += ((float) time / 1000);
                 mainModelListener.onGameStart(gameChosen);
             }
         }
+    }
+
+    private void nullifyFields(){
+        initialCount = 0;
+        count = 0;
+        gameChosen = null;
+        correctCount = 0;
+        incorrectCount = 0;
     }
 
     @Override
@@ -66,5 +86,10 @@ public class MainModelImpl implements MainModel {
     @Override
     public void setChosenGame(MiniGame gameType) {
         this.gameChosen = gameType;
+    }
+
+    @Override
+    public MiniGame getChosenGame() {
+        return gameChosen;
     }
 }

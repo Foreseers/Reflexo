@@ -99,9 +99,10 @@ public class TwoSquareGameActivity extends AppCompatActivity implements TwoSquar
     }
 
     @Override
-    public void finishGame(long time) {
+    public void finishGame(long time, boolean correct) {
         Intent intent = new Intent();
         intent.putExtra("reactionTime", String.valueOf(time));
+        intent.putExtra("result", correct);
         setResult(RESULT_OK, intent);
         finish();
     }

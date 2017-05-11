@@ -12,6 +12,7 @@ public interface TwoSquareGameModel {
     public void onDestroy();
     public void onStart();
     public String getColorName(String hexCode);
+    public boolean getResult();
 
     public class SquareGameData {
         private String[] colorHexCodes;

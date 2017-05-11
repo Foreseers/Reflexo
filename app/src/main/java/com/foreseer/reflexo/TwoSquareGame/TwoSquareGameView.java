@@ -9,7 +9,7 @@ package com.foreseer.reflexo.TwoSquareGame;
 
 public interface TwoSquareGameView {
     public void onResultReceived(boolean result);
-    public void finishGame(long time);
+    public void finishGame(long time, boolean correct);
     public void showChooseColorMessage(String message, String colorHex);
     public void makeMessageInvisible();
     public void setSquareColors(String[] colorHexCodes);

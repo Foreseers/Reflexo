@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tab_twoSquares"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:columnCount="2">
+
+    <TextView
+        android:id="@+id/textView_twoSquares_totalTries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/total_tries"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/textView_twoSquares_totalTriesNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/textView_twoSquares_correctTries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/correct_tries"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/textView_twoSquares_correctTriesNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/textView_twoSquares_incorrectTries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/incorrect_tries"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/textView_twoSquares_incorrectTriesNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/textView_twoSquares_percentageCorrectTries"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/correct_percentage"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/textView_twoSquares_percentageCorrectTriesNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/textView_twoSquares_averageReactionTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/average_reaction_time"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/textView_twoSquares_averageReactionTimeNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_row="4"
+        android:text="1"
+        android:textSize="22sp" />
+</GridLayout>

@@ -22,14 +22,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp" />
 
-    <GridLayout
+    <LinearLayout
         android:id="@+id/main_grid_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="32dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="@+id/textView"
@@ -47,6 +46,12 @@
             tools:layout_editor_absoluteX="116dp"
             tools:layout_editor_absoluteY="156dp" />
 
-    </GridLayout>
+        <Button
+            android:id="@+id/button_statistics"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/statistics" />
+
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -11,14 +11,17 @@ import com.foreseer.reflexo.MiniGame;
 
 public interface MainModel {
     public void initiateStart(int count);
-    public void onGameFinished(long time);
+    public void onGameFinished(long time, boolean result);
     public void onGameAborted();
     public void setChosenGame(MiniGame gameType);
+    public MiniGame getChosenGame();
 
     public interface MainModelListener {
         public void onGameStart(MiniGame gameType);
         public void onGameFinished(long time);
-        public void onGameSeriesFinished(long time, int seriesCount);
+        public void onGameSeriesFinished(float time, int seriesCount);
         public void onGameSeriesAborted();
+        public void saveStatistics(MiniGame gameType, int initialCount, int correctTries, int incorrectTries,
+                                   float averageReactionTime);
     }
 }

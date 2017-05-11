@@ -63,7 +63,7 @@ public class TwoSquareGamePresenterImpl implements TwoSquareGamePresenter, TwoSq
         Observable.timer(2, TimeUnit.SECONDS)
                 .subscribe(i -> {
                     if (gameView != null) {
-                        gameView.finishGame(time);
+                        gameView.finishGame(time, result);
                     }
                 });
     }

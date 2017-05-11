@@ -25,6 +25,8 @@ public class TwoSquareGameModelImpl implements TwoSquareGameModel {
 
     private Map<String, String> colorHexNames;
 
+    private boolean result;
+
     public TwoSquareGameModelImpl(SquareGameModelListener listener) {
         this.listener = listener;
         fillColourMap();
@@ -47,7 +49,8 @@ public class TwoSquareGameModelImpl implements TwoSquareGameModel {
     @Override
     public void onColorChosen(String color) {
         long time = new Date().getTime() - startDate.getTime();
-        listener.onGameFinished(color.equals(gameData.getWinningCode()), time);
+        result = color.equals(gameData.getWinningCode());
+        listener.onGameFinished(result, time);
     }
 
     @Override
@@ -63,6 +66,11 @@ public class TwoSquareGameModelImpl implements TwoSquareGameModel {
     @Override
     public String getColorName(String hexCode) {
         return colorHexNames.get(hexCode);
+    }
+
+    @Override
+    public boolean getResult() {
+        return result;
     }
 
     private List<Color> getShuffledColorList(){

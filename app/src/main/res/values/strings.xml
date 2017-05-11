@@ -2,6 +2,7 @@
     <string name="app_name">Reflexo</string>
     <string name="start">Start</string>
     <string name="start_three">Start series of 3!</string>
+    <string name="statistics">Statistics</string>
 
     <!-- Minigame names -->
     <string name="game_squares">Four Squares</string>
@@ -10,5 +11,12 @@
     <!-- Series -->
     <string name="series_one">Just one game</string>
     <string name="series_three">Series of three!</string>
+
+    <!-- Statistics -->
+    <string name="total_tries">Total tries:</string>
+    <string name="correct_tries">Correct:</string>
+    <string name="incorrect_tries">Incorrect:</string>
+    <string name="correct_percentage">Percentage of correct tries:</string>
+    <string name="average_reaction_time">Average reaction time:</string>
 
 </resources>

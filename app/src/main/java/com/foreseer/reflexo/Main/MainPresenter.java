@@ -15,7 +15,8 @@ public interface MainPresenter {
     public void onStartGameButtonPressed();
     public void onStartThreeSeriesButtonPressed();
     public void onSeriesChosen(String seriesChosen);
-    public void gameFinished(long time);
+    public void gameFinished(long time, boolean result);
     public void gameFinishedNullReceived();
     public void onBackButtonPressed(String stage);
+    public void onStatisticsButtonPressed();
 }
