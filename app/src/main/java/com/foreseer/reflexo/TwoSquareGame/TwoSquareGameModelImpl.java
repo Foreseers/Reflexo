@@ -1,4 +1,4 @@
-package com.foreseer.reflexo.SquareGame;
+package com.foreseer.reflexo.TwoSquareGame;
 
 import com.foreseer.reflexo.IntUtils;
 
@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 
 /**
  * Created by Foreseer on 10/05/2017.
@@ -16,20 +16,32 @@ import java.util.Random;
  * e-mail (preferred): fforeseer@gmail.com
  */
 
-public class SquareGameModelImpl implements SquareGameModel {
+public class TwoSquareGameModelImpl implements TwoSquareGameModel {
     private SquareGameModelListener listener;
 
     private Date startDate;
 
     private SquareGameData gameData;
 
-    public SquareGameModelImpl(SquareGameModelListener listener) {
+    private Map<String, String> colorHexNames;
+
+    public TwoSquareGameModelImpl(SquareGameModelListener listener) {
         this.listener = listener;
+        fillColourMap();
         initializeGame();
     }
 
     public void initializeGame() {
         listener.onGameDataReceived(getNewGameData(getShuffledColorList()));
+    }
+
+    private void fillColourMap(){
+        colorHexNames = new HashMap<>();
+
+        colorHexNames.put("#FFFF00", "Yellow");
+        colorHexNames.put("#00FF00", "Green");
+        colorHexNames.put("#FF0000", "Red");
+        colorHexNames.put("#0000FF", "Blue");
     }
 
     @Override
@@ -48,6 +60,11 @@ public class SquareGameModelImpl implements SquareGameModel {
         startDate = new Date();
     }
 
+    @Override
+    public String getColorName(String hexCode) {
+        return colorHexNames.get(hexCode);
+    }
+
     private List<Color> getShuffledColorList(){
         List<Color> colors = new ArrayList<>();
         colors.add(new Color("#FFFF00", "Yellow"));
@@ -60,23 +77,23 @@ public class SquareGameModelImpl implements SquareGameModel {
     }
 
     private SquareGameData getNewGameData(List<Color> colors){
-        String[] hexCodes = new String[4];
-        for (int i = 0; i < colors.size(); i++) {
+        String[] hexCodes = new String[2];
+        for (int i = 0; i < 2; i++) {
             hexCodes[i] = colors.get(i).getHexCode();
         }
 
-        int rand = IntUtils.getRandomNumberInRange(0, 3);
+        int rand = IntUtils.getRandomNumberInRange(0, 1);
         String colorMessage = "";
         String winningHex = "";
-        for (int j = 0; j < colors.size(); j++) {
-            if (j != rand){
-                continue;
-            }
-            colorMessage = colors.get(j).getColorName();
-            winningHex = colors.get(j).getHexCode();
+        colorMessage = colors.get(rand).getColorName();
+        winningHex = colors.get(rand).getHexCode();
+
+        String[] colorNames = new String[2];
+        for (int i = 0; i < hexCodes.length; i++) {
+            colorNames[i] = colorHexNames.get(hexCodes[i]);
         }
 
-        gameData = new SquareGameData(hexCodes, winningHex, colorMessage);
+        gameData = new SquareGameData(hexCodes, winningHex, colorMessage, colorNames);
         return gameData;
     }
 

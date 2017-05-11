@@ -1,4 +1,4 @@
-package com.foreseer.reflexo.SquareGame;
+package com.foreseer.reflexo.TwoSquareGame;
 
 /**
  * Created by Foreseer on 10/05/2017.
@@ -7,7 +7,7 @@ package com.foreseer.reflexo.SquareGame;
  * e-mail (preferred): fforeseer@gmail.com
  */
 
-public interface SquareGamePresenter {
+public interface TwoSquareGamePresenter {
     public void onColorChosen(String colorHexCode);
     public void onDestroy();
     public void onSquaresShown();

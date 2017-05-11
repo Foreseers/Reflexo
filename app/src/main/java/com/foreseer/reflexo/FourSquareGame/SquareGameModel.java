@@ -1,4 +1,4 @@
-package com.foreseer.reflexo.SquareGame;
+package com.foreseer.reflexo.FourSquareGame;
 
 /**
  * Created by Foreseer on 10/05/2017.

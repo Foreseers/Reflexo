@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SquareGame.SquareGameActivity"></activity>
+        <activity android:name=".FourSquareGame.SquareGameActivity" />
+        <activity android:name=".TwoSquareGame.TwoSquareGameActivity"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package com.foreseer.reflexo.SquareGame;
+package com.foreseer.reflexo.TwoSquareGame;
 
 import java.util.concurrent.TimeUnit;
 
@@ -13,15 +13,15 @@ import io.reactivex.schedulers.Schedulers;
  * e-mail (preferred): fforeseer@gmail.com
  */
 
-public class SquareGamePresenterImpl implements SquareGamePresenter, SquareGameModel.SquareGameModelListener{
-    private SquareGameView gameView;
-    private SquareGameModel gameModel;
+public class TwoSquareGamePresenterImpl implements TwoSquareGamePresenter, TwoSquareGameModel.SquareGameModelListener{
+    private TwoSquareGameView gameView;
+    private TwoSquareGameModel gameModel;
 
     private final int DELAY = 2;
 
-    public SquareGamePresenterImpl(SquareGameView gameView) {
+    public TwoSquareGamePresenterImpl(TwoSquareGameView gameView) {
         this.gameView = gameView;
-        this.gameModel = new SquareGameModelImpl(this);
+        this.gameModel = new TwoSquareGameModelImpl(this);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class SquareGamePresenterImpl implements SquareGamePresenter, SquareGameM
     }
 
     @Override
-    public void onGameDataReceived(SquareGameModel.SquareGameData data) {
+    public void onGameDataReceived(TwoSquareGameModel.SquareGameData data) {
         gameView.showChooseColorMessage(data.getColorMessage(), data.getWinningCode());
         Observable.timer(2, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -51,6 +51,7 @@ public class SquareGamePresenterImpl implements SquareGamePresenter, SquareGameM
                     if (gameView != null) {
                         gameView.makeMessageInvisible();
                         gameView.setSquareColors(data.getColorHexCodes());
+                        gameView.setSquareText(data.getColorHexCodes(), data.getColorNames());
                         gameModel.onStart();
                     }
                 });

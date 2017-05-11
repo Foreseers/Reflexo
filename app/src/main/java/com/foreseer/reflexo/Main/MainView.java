@@ -9,5 +9,12 @@ package com.foreseer.reflexo.Main;
 
 public interface MainView {
     public void startSquareActivity();
+    public void startTwoSquareActivity();
     public void showToast(String message);
+    public void showGameChoosingFragment();
+    public void removeGameChoosingFragment();
+    public void showSeriesChoosingFragment();
+    public void removeSeriesChoosingFragment();
+    public void hideStartButton();
+    public void showStartButton();
 }

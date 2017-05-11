@@ -1,4 +1,4 @@
-package com.foreseer.reflexo.SquareGame;
+package com.foreseer.reflexo.TwoSquareGame;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,33 +9,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.foreseer.reflexo.Main.MainActivity;
+import com.foreseer.reflexo.FourSquareGame.SquareGamePresenter;
+import com.foreseer.reflexo.FourSquareGame.SquareGamePresenterImpl;
 import com.foreseer.reflexo.R;
-
-import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
-public class SquareGameActivity extends AppCompatActivity implements SquareGameView{
+public class TwoSquareGameActivity extends AppCompatActivity implements TwoSquareGameView{
 
-    private SquareGamePresenter presenter;
+    private TwoSquareGamePresenterImpl presenter;
 
     @BindView(R.id.button_square1)
     Button button_firstSquare;
 
     @BindView(R.id.button_square2)
     Button button_secondSquare;
-
-    @BindView(R.id.button_square3)
-    Button button_thirdSquare;
-
-    @BindView(R.id.button_square4)
-    Button button_fourthSquare;
 
     @BindView(R.id.textView_colorMessage)
     TextView textView_colorMessage;
@@ -45,16 +35,14 @@ public class SquareGameActivity extends AppCompatActivity implements SquareGameV
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_square_game);
+        setContentView(R.layout.activity_two_square_game);
 
         unbinder = ButterKnife.bind(this);
 
         button_firstSquare.setOnClickListener(v -> onSquareTapped(v));
         button_secondSquare.setOnClickListener(v -> onSquareTapped(v));
-        button_thirdSquare.setOnClickListener(v -> onSquareTapped(v));
-        button_fourthSquare.setOnClickListener(v -> onSquareTapped(v));
 
-        this.presenter = new SquareGamePresenterImpl(this);
+        this.presenter = new TwoSquareGamePresenterImpl(this);
     }
 
     public void onSquareTapped(View view){
@@ -70,12 +58,15 @@ public class SquareGameActivity extends AppCompatActivity implements SquareGameV
 
         button_secondSquare.setVisibility(View.VISIBLE);
         button_secondSquare.setBackgroundColor(Color.parseColor(colorHexCodes[1]));
+    }
 
-        button_thirdSquare.setVisibility(View.VISIBLE);
-        button_thirdSquare.setBackgroundColor(Color.parseColor(colorHexCodes[2]));
+    @Override
+    public void setSquareText(String[] colorHexCodes, String[] colorNames) {
+        button_firstSquare.setText(colorNames[0]);
+        button_firstSquare.setTextColor(Color.parseColor(colorHexCodes[0]));
 
-        button_fourthSquare.setVisibility(View.VISIBLE);
-        button_fourthSquare.setBackgroundColor(Color.parseColor(colorHexCodes[3]));
+        button_secondSquare.setText(colorNames[1]);
+        button_secondSquare.setTextColor(Color.parseColor(colorHexCodes[1]));
     }
 
     @Override
@@ -88,8 +79,6 @@ public class SquareGameActivity extends AppCompatActivity implements SquareGameV
     private void showSquareGameMessage(String message) {
         button_firstSquare.setVisibility(View.GONE);
         button_secondSquare.setVisibility(View.GONE);
-        button_thirdSquare.setVisibility(View.GONE);
-        button_fourthSquare.setVisibility(View.GONE);
 
         textView_colorMessage.setVisibility(View.VISIBLE);
         textView_colorMessage.setText(message);
