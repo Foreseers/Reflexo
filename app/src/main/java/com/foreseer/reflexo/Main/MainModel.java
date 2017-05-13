@@ -21,7 +21,6 @@ public interface MainModel {
         public void onGameFinished(long time);
         public void onGameSeriesFinished(float time, int seriesCount);
         public void onGameSeriesAborted();
-        public void saveStatistics(MiniGame gameType, int initialCount, int correctTries, int incorrectTries,
-                                   float averageReactionTime);
+        public void saveStatistics(MiniGame gameType, MainStatisticsLogger.StatisticsBundle bundle);
     }
 }

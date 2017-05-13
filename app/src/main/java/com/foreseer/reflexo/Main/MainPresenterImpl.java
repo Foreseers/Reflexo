@@ -128,9 +128,7 @@ public class MainPresenterImpl implements MainPresenter, MainModelListener {
     }
 
     @Override
-    public void saveStatistics(MiniGame gameType, int initialCount, int correctTries, int incorrectTries, float averageReactionTime) {
-        MainStatisticsLogger.StatisticsBundle bundle = new MainStatisticsLogger.StatisticsBundle(gameType, initialCount, correctTries, incorrectTries,
-                averageReactionTime);
+    public void saveStatistics(MiniGame gameType, MainStatisticsLogger.StatisticsBundle bundle) {
         MainStatisticsLogger logger = new MainStatisticsLoggerImpl();
         logger.logStatistics(bundle, mainView.getMainActivity());
     }

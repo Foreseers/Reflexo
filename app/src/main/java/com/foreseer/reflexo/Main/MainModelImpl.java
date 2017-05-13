@@ -50,19 +50,41 @@ public class MainModelImpl implements MainModel {
         reactionTimeSum += ((float) time / 1000);
 
         if (count == 0 && initialCount == 1){
-            mainModelListener.saveStatistics(gameChosen, initialCount, correctCount, incorrectCount, reactionTimeSum / initialCount);
+            saveStatistics();
             mainModelListener.onGameFinished(time);
             nullifyFields();
         } else {
             if (initialCount != 0 && count == 0){
                 float average = reactionTimeSum / initialCount;
-                mainModelListener.saveStatistics(gameChosen, initialCount, correctCount, incorrectCount, reactionTimeSum / initialCount);
+                saveStatistics();
                 mainModelListener.onGameSeriesFinished(average, initialCount);
                 nullifyFields();
             } else if (initialCount != 0){
                 mainModelListener.onGameStart(gameChosen);
             }
         }
+    }
+
+    private void saveStatistics(){
+        MainStatisticsLogger.StatisticsEntity entities[] = new MainStatisticsLogger.StatisticsEntity[4];
+        MainStatisticsLogger.StatisticsEntity entity = new MainStatisticsLogger.StatisticsEntity(MainStatisticsLogger.StatisticsKeys.TOTALTRIES,
+                String.valueOf(initialCount));
+        entities[0] = entity;
+
+        entity = new MainStatisticsLogger.StatisticsEntity(MainStatisticsLogger.StatisticsKeys.CORRECTTRIES,
+                String.valueOf(correctCount));
+        entities[1] = entity;
+
+        entity = new MainStatisticsLogger.StatisticsEntity(MainStatisticsLogger.StatisticsKeys.INCORRECTTRIES,
+                String.valueOf(incorrectCount));
+        entities[2] = entity;
+
+        entity = new MainStatisticsLogger.StatisticsEntity(MainStatisticsLogger.StatisticsKeys.AVERAGEREACTIONTIME,
+                String.valueOf(reactionTimeSum / initialCount));
+        entities[3] = entity;
+
+        MainStatisticsLogger.StatisticsBundle bundle = new MainStatisticsLogger.StatisticsBundle(gameChosen, entities);
+        mainModelListener.saveStatistics(gameChosen, bundle);
     }
 
     private void nullifyFields(){

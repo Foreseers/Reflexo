@@ -1,5 +1,7 @@
 package com.foreseer.reflexo.Statistics;
 
+import android.app.Activity;
+
 import com.foreseer.reflexo.Main.MainStatisticsLogger;
 import com.foreseer.reflexo.MiniGame;
 
@@ -11,5 +13,5 @@ import com.foreseer.reflexo.MiniGame;
  */
 
 public interface StatisticsReader {
-    public MainStatisticsLogger.StatisticsBundle getStatistics(MiniGame gameType);
+    public MainStatisticsLogger.StatisticsBundle getStatistics(MiniGame gameType, Activity activity);
 }

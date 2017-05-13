@@ -104,9 +104,10 @@ public class SquareGameActivity extends AppCompatActivity implements SquareGameV
     }
 
     @Override
-    public void finishGame(long time) {
+    public void finishGame(long time, boolean result) {
         Intent intent = new Intent();
         intent.putExtra("reactionTime", String.valueOf(time));
+        intent.putExtra("result", result);
         setResult(RESULT_OK, intent);
         finish();
     }

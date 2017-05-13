@@ -4,6 +4,10 @@ import android.app.Activity;
 
 import com.foreseer.reflexo.MiniGame;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 /**
  * Created by Foreseer on 11/05/2017.
  * For any questions, feel free to reach me using any of my contacts.
@@ -16,37 +20,36 @@ public interface MainStatisticsLogger {
 
     public class StatisticsBundle {
         private MiniGame gameType;
-        private int totalTries;
-        private int correctTries;
-        private int incorrectTries;
-        private float averageReactionTime;
+        private Map<StatisticsKeys, String> statisticsData;
 
-        public StatisticsBundle(MiniGame gameType, int totalTries, int correctTries, int incorrectTries, float averageReactionTime) {
+        public StatisticsBundle(MiniGame gameType, StatisticsEntity entities[]) {
             this.gameType = gameType;
-            this.totalTries = totalTries;
-            this.correctTries = correctTries;
-            this.incorrectTries = incorrectTries;
-            this.averageReactionTime = averageReactionTime;
+            statisticsData = new HashMap<>();
+
+            for (StatisticsEntity entity : entities){
+                statisticsData.put(entity.getKey(), entity.getValue());
+            }
+        }
+
+        public StatisticsBundle(MiniGame gameType, Map<StatisticsKeys, String> entities){
+            this.gameType = gameType;
+            statisticsData = entities;
+        }
+
+        public Set<Map.Entry<StatisticsKeys, String>> getEntrySet(){
+            return statisticsData.entrySet();
         }
 
         public MiniGame getGameType() {
             return gameType;
         }
 
-        public int getTotalTries() {
-            return totalTries;
-        }
-
-        public int getCorrectTries() {
-            return correctTries;
-        }
-
-        public int getIncorrectTries() {
-            return incorrectTries;
-        }
-
-        public float getAverageReactionTime() {
-            return averageReactionTime;
+        public String getStatisticsData(StatisticsKeys key){
+            if (statisticsData.containsKey(key)){
+                return statisticsData.get(key);
+            } else {
+                return null;
+            }
         }
     }
 
@@ -55,5 +58,23 @@ public interface MainStatisticsLogger {
         CORRECTTRIES,
         INCORRECTTRIES,
         AVERAGEREACTIONTIME
+    }
+
+    public class StatisticsEntity {
+        private StatisticsKeys key;
+        private String value;
+
+        public StatisticsEntity(StatisticsKeys key, String value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public StatisticsKeys getKey() {
+            return key;
+        }
+
+        public String getValue() {
+            return value;
+        }
     }
 }

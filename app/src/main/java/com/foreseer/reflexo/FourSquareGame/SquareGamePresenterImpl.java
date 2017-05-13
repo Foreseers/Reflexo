@@ -62,7 +62,7 @@ public class SquareGamePresenterImpl implements SquareGamePresenter, SquareGameM
         Observable.timer(2, TimeUnit.SECONDS)
                 .subscribe(i -> {
                     if (gameView != null) {
-                        gameView.finishGame(time);
+                        gameView.finishGame(time, result);
                     }
                 });
     }

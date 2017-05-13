@@ -8,5 +8,5 @@ package com.foreseer.reflexo.Statistics;
  */
 
 public interface StatisticsPresenter {
-
+    public void onStart();
 }
