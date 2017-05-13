@@ -16,7 +16,7 @@
     <string name="total_tries">Total tries:</string>
     <string name="correct_tries">Correct:</string>
     <string name="incorrect_tries">Incorrect:</string>
-    <string name="correct_percentage">Percentage of correct tries:</string>
+    <string name="correct_percentage">Correct percentage:</string>
     <string name="average_reaction_time">Average reaction time:</string>
 
 </resources>

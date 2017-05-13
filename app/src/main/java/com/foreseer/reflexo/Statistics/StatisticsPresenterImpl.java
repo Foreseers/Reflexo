@@ -44,11 +44,11 @@ public class StatisticsPresenterImpl implements StatisticsPresenter {
             if (total == 0) {
                 percentageCorrect = 0;
             } else {
-                percentageCorrect = (float) total / (float) correct;
+                percentageCorrect = (float) 100 / ((float) total / (float) correct);
             }
             statisticsView.initializeTab(tabNames.get(miniGame), String.valueOf(total),
-                    String.valueOf(correct), String.valueOf(incorrect), String.valueOf(percentageCorrect),
-                    String.valueOf(averageReactionTime));
+                    String.valueOf(correct), String.valueOf(incorrect), String.format("%.2f %s", percentageCorrect, "%"),
+                    String.format("%.2f sec", averageReactionTime));
         }
     }
 }
