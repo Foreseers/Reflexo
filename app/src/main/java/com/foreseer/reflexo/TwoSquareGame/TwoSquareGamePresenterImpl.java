@@ -1,5 +1,7 @@
 package com.foreseer.reflexo.TwoSquareGame;
 
+import com.foreseer.reflexo.MiniGames.SquareMiniGame;
+
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -42,7 +44,7 @@ public class TwoSquareGamePresenterImpl implements TwoSquareGamePresenter, TwoSq
     }
 
     @Override
-    public void onGameDataReceived(TwoSquareGameModel.SquareGameData data) {
+    public void onGameDataReceived(SquareMiniGame.SquareGameData data) {
         gameView.showChooseColorMessage(data.getColorMessage(), data.getWinningCode());
         Observable.timer(2, TimeUnit.SECONDS)
                 .observeOn(AndroidSchedulers.mainThread())

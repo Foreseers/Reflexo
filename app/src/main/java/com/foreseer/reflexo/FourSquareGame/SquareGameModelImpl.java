@@ -1,6 +1,7 @@
 package com.foreseer.reflexo.FourSquareGame;
 
 import com.foreseer.reflexo.IntUtils;
+import com.foreseer.reflexo.MiniGames.SquareMiniGame;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +20,7 @@ public class SquareGameModelImpl implements SquareGameModel {
 
     private Date startDate;
 
-    private SquareGameData gameData;
+    private SquareMiniGame.SquareGameData gameData;
 
     public SquareGameModelImpl(SquareGameModelListener listener) {
         this.listener = listener;
@@ -27,7 +28,7 @@ public class SquareGameModelImpl implements SquareGameModel {
     }
 
     public void initializeGame() {
-        listener.onGameDataReceived(getNewGameData(getShuffledColorList()));
+        listener.onGameDataReceived(getNewGameData());
     }
 
     @Override
@@ -46,54 +47,8 @@ public class SquareGameModelImpl implements SquareGameModel {
         startDate = new Date();
     }
 
-    private List<Color> getShuffledColorList(){
-        List<Color> colors = new ArrayList<>();
-        colors.add(new Color("#FFFF00", "YELLOW"));
-        colors.add(new Color("#00FF00", "GREEN"));
-        colors.add(new Color("#FF0000", "RED"));
-        colors.add(new Color("#0000FF", "BLUE"));
-
-        Collections.shuffle(colors);
-        return colors;
-    }
-
-    private SquareGameData getNewGameData(List<Color> colors){
-        String[] hexCodes = new String[4];
-        for (int i = 0; i < colors.size(); i++) {
-            hexCodes[i] = colors.get(i).getHexCode();
-        }
-
-        int rand = IntUtils.getRandomNumberInRange(0, 3);
-        String colorMessage = "";
-        String winningHex = "";
-        for (int j = 0; j < colors.size(); j++) {
-            if (j != rand){
-                continue;
-            }
-            colorMessage = colors.get(j).getColorName();
-            winningHex = colors.get(j).getHexCode();
-        }
-
-        gameData = new SquareGameData(hexCodes, winningHex, colorMessage);
+    private SquareMiniGame.SquareGameData getNewGameData(){
+        gameData = SquareMiniGame.getNewGame(4);
         return gameData;
-    }
-
-
-    private class Color {
-        private String hexCode;
-        private String colorName;
-
-        public Color(String hexCode, String colorName) {
-            this.hexCode = hexCode;
-            this.colorName = colorName;
-        }
-
-        public String getHexCode() {
-            return hexCode;
-        }
-
-        public String getColorName() {
-            return colorName;
-        }
     }
 }
