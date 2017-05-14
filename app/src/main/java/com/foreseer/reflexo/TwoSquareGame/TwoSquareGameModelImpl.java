@@ -40,10 +40,10 @@ public class TwoSquareGameModelImpl implements TwoSquareGameModel {
     private void fillColourMap(){
         colorHexNames = new HashMap<>();
 
-        colorHexNames.put("#FFFF00", "Yellow");
-        colorHexNames.put("#00FF00", "Green");
-        colorHexNames.put("#FF0000", "Red");
-        colorHexNames.put("#0000FF", "Blue");
+        colorHexNames.put("#FFFF00", "YELLOW");
+        colorHexNames.put("#00FF00", "GREEN");
+        colorHexNames.put("#FF0000", "RED");
+        colorHexNames.put("#0000FF", "BLUE");
     }
 
     @Override
@@ -75,10 +75,10 @@ public class TwoSquareGameModelImpl implements TwoSquareGameModel {
 
     private List<Color> getShuffledColorList(){
         List<Color> colors = new ArrayList<>();
-        colors.add(new Color("#FFFF00", "Yellow"));
-        colors.add(new Color("#00FF00", "Green"));
-        colors.add(new Color("#FF0000", "Red"));
-        colors.add(new Color("#0000FF", "Blue"));
+        colors.add(new Color("#FFFF00", "YELLOW"));
+        colors.add(new Color("#00FF00", "GREEN"));
+        colors.add(new Color("#FF0000", "RED"));
+        colors.add(new Color("#0000FF", "BLUE"));
 
         Collections.shuffle(colors);
         return colors;

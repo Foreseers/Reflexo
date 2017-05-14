@@ -112,7 +112,7 @@ public class MainPresenterImpl implements MainPresenter, MainModelListener {
     }
 
     @Override
-    public void onGameFinished(long time) {
+    public void onGameFinished(float time) {
         mainView.showToast("Took " + time + " seconds!");
     }
 

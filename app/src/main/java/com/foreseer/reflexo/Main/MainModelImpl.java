@@ -51,7 +51,8 @@ public class MainModelImpl implements MainModel {
 
         if (count == 0 && initialCount == 1){
             saveStatistics();
-            mainModelListener.onGameFinished(time);
+            float average = (float) time / 1000;
+            mainModelListener.onGameFinished(average);
             nullifyFields();
         } else {
             if (initialCount != 0 && count == 0){

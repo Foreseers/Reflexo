@@ -18,7 +18,7 @@ public interface MainModel {
 
     public interface MainModelListener {
         public void onGameStart(MiniGame gameType);
-        public void onGameFinished(long time);
+        public void onGameFinished(float time);
         public void onGameSeriesFinished(float time, int seriesCount);
         public void onGameSeriesAborted();
         public void saveStatistics(MiniGame gameType, MainStatisticsLogger.StatisticsBundle bundle);

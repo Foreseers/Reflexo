@@ -48,10 +48,10 @@ public class SquareGameModelImpl implements SquareGameModel {
 
     private List<Color> getShuffledColorList(){
         List<Color> colors = new ArrayList<>();
-        colors.add(new Color("#FFFF00", "Yellow"));
-        colors.add(new Color("#00FF00", "Green"));
-        colors.add(new Color("#FF0000", "Red"));
-        colors.add(new Color("#0000FF", "Blue"));
+        colors.add(new Color("#FFFF00", "YELLOW"));
+        colors.add(new Color("#00FF00", "GREEN"));
+        colors.add(new Color("#FF0000", "RED"));
+        colors.add(new Color("#0000FF", "BLUE"));
 
         Collections.shuffle(colors);
         return colors;

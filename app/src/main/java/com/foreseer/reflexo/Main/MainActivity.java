@@ -1,5 +1,6 @@
 package com.foreseer.reflexo.Main;
 
+import android.animation.LayoutTransition;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
